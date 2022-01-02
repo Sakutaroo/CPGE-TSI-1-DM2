@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+
+def main():
+    pixels = []
+    dimension = []
+    message = ""
+    index = 0
+    temp_col = ""
+    temp_line = ""
+    a, b = 1, 1
+    diff_fibonacci = 1
+    skip_char = 0
+    f = open("citation.ppm", "r") # modify the file name here
+
+    f.readline()
+    dimension.append(f.readline())
+    while dimension[0][index] != ' ':
+        temp_col = temp_col + str(dimension[0][index])
+        index += 1
+    while dimension[0][index] != '\n':
+        temp_line = temp_line + str(dimension[0][index])
+        index += 1
+    col = int(temp_col)
+    line = int(temp_line)
+    n = 200 + line - col
+    for ligne in range(n + 1):
+        f.readline()
+    while pixels != "64\n":
+        while skip_char < diff_fibonacci:
+            f.readline()
+            skip_char += 1
+        pixels = f.readline()
+        if pixels != "64\n":
+            message = message + chr(int(pixels))
+        a, b = b, a + b
+        diff_fibonacci = b - a
+        skip_char = 1
+
+    print(f"{message}")
+    f.close()
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())
